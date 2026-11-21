@@ -15,7 +15,7 @@ try{
  const key=await crypto.subtle.importKey('raw',b(k),'AES-CBC',false,['decrypt']);
  const html=new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-CBC',iv:b(IV)},key,b(CT)));
  if(!/^<!DOCTYPE html>/i.test(html))throw 0;
- document.open();document.write(html);document.close();
+ const d=new DOMParser().parseFromString(html,'text/html');document.replaceChild(document.adoptNode(d.documentElement),document.documentElement);
 }catch(e){msg('鍵が合わないため、開けませんでした。いただいたリンクをそのまま開いてください。')}
 })();
 </script></body></html>
